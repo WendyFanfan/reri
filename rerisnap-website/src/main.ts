@@ -21,10 +21,11 @@ import {
 
 export type MessageSchema = typeof messages['en']
 
-const i18n = createI18n<[MessageSchema], 'de' | 'en'>({
+const i18n = createI18n({
     legacy: false,
     locale: 'de',
     fallbackLocale: 'en',
+    messages,
 })
 
 const app = createApp(App)
