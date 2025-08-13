@@ -1,19 +1,7 @@
 <template>
     <div class="site-wrapper">
-        📢 此页面还在努力开发中:D... Wendy 11.08.2025
         <!-- 顶部导航栏 -->
-        <nav class="main-nav">
-            <div class="nav-left">
-                <img src="../assets/images/logo.png" alt="RERI Logo" class="nav-logo" />
-                <span class="brand-name">RERI</span>
-            </div>
-            
-            <div class="nav-right">
-                <n-dropdown trigger="hover" :options="langOpts" @select="switchLang">
-                    <n-button class="lang-btn">{{ $t('language') }}</n-button>
-                </n-dropdown>
-            </div>
-        </nav>
+        <NavBar/>
 
         <!-- Banner 图（带文字蒙版） -->
         <div class="banner-wrapper">
@@ -68,9 +56,12 @@
                     <n-icon size="40">
                         <LogoInstagram />
                     </n-icon>
-                    <n-icon size="40">
-                        <LogoTiktok />
-                    </n-icon>
+                        <n-icon size="40">
+                            <LogoTiktok />
+                        </n-icon>
+                        <n-icon size="40">
+                            <LogoAmazon />
+                        </n-icon>
                 </div>
                 <div class="copyright">
                     &copy; {{ new Date().getFullYear() }} RERI GmbH. All rights reserved.
@@ -82,21 +73,16 @@
 
 <script setup>
 import { useI18n } from "vue-i18n";
-import { LogoFacebook, LogoInstagram, LogoTiktok } from '@vicons/ionicons5'
+import NavBar from '../components/NavBar.vue'
+import { LogoFacebook, LogoInstagram, LogoTiktok, Person, LogoAmazon } from '@vicons/ionicons5'
 import ProductCard from "../components/ProductCard.vue";
 import good1Img from "../assets/images/good1.jpg";
 import good2Img from "../assets/images/good2.webp";
 // import good3Img from "../assets/images/good3.jpg";
-const { locale } = useI18n();
 
-const switchLang = (lang) => {
-    locale.value = lang;
-};
 
-const langOpts = [
-    { label: '🇩🇪Deutsch', key: 'de' },
-    { label: '🇬🇧English', key: 'en' },
-];
+
+
 
 const products = [
     {
@@ -146,78 +132,41 @@ const products = [
     flex-direction: column;
 }
 
-/* 顶部导航栏 */
-.main-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #fff;
-    padding: 1.2rem 2rem;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
-    position: sticky;
-    top: 0;
-    z-index: 10;
-}
 
-.nav-left {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.nav-logo {
-    height: 48px;
-    width: auto;
-    object-fit: contain;
-}
-
-.brand-name {
-    font-size: 1.7rem;
-    font-weight: 700;
-    color: #1e293b;
-    letter-spacing: 2px;
-}
-
-.nav-right {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.lang-btn {
-    background: #f1f5f9;
-    font-size: 1rem;
-    padding: 0.5rem 1.2rem;
-    color: #334155;
-    border: none;
-    cursor: pointer;
-    transition: background 0.2s;
-}
-
-.lang-btn:hover {
-    background: #e0e7ef;
-}
 
 /* Banner 图 */
 .banner-wrapper {
     width: 100%;
-    max-height: 340px;
+    height: 46vh; /* 高度始终为视口高度的46% */
+    min-height: 120px;
+    max-height: 420px;
     overflow: hidden;
     background: #e0e7ff;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
+    animation: banner-fade-in 1.2s cubic-bezier(.4,0,.2,1);
+}
+
+@keyframes banner-fade-in {
+    0% {
+        opacity: 0;
+        transform: scale(1.08);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 .banner-img {
     width: 100%;
-    height: auto;
+    height: 100%;
     object-fit: cover;
-    max-height: 340px;
-    border-radius: 0 0 18px 18px;
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
     display: block;
+    transition: transform 0.8s cubic-bezier(.4,0,.2,1);
 }
 
 .banner-mask {
@@ -227,7 +176,6 @@ const products = [
     right: 0;
     bottom: 0;
     background: rgba(30, 41, 59, 0.38);
-    /* 深色半透明蒙版 */
     z-index: 1;
     pointer-events: none;
     border-radius: 0 0 18px 18px;
@@ -245,19 +193,19 @@ const products = [
     width: 90%;
     max-width: 700px;
     pointer-events: none;
+    opacity: 0;
+    animation: banner-text-fade-in 1.2s 0.3s cubic-bezier(.4,0,.2,1) forwards;
 }
 
-.banner-text h2 {
-    font-size: 2.2rem;
-    font-weight: 800;
-    margin-bottom: 0.7rem;
-    letter-spacing: 1px;
-}
-
-.banner-text p {
-    font-size: 1.2rem;
-    font-weight: 400;
-    line-height: 1.5;
+@keyframes banner-text-fade-in {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -40%);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
 }
 
 /* 主视觉区 */
@@ -427,100 +375,114 @@ const products = [
 
 /* 移动端适配 */
 @media (max-width: 600px) {
-  .main-nav {
-    flex-direction: row; /* 保持一行 */
-    align-items: center;
-    padding: 0.8rem 1rem;
-    gap: 0.5rem;
-  }
-  .nav-left {
-    gap: 0.5rem;
-  }
-  .brand-name {
-    font-size: 1.2rem;
-  }
-  .nav-logo {
-    height: 36px;
-  }
-  .nav-right {
-    width: auto;
-    justify-content: flex-end;
-  }
-  .banner-wrapper {
-    max-height: 180px;
-    min-height: 120px;
-  }
-  .banner-img {
-    max-height: 180px;
-    border-radius: 0 0 10px 10px;
-  }
-  .banner-text h2 {
-    font-size: 1.1rem;
-  }
-  .banner-text p {
-    font-size: 0.85rem;
-  }
-  .hero-section {
-    min-height: 180px;
-    margin-bottom: 1rem;
-    padding: 0.5rem 0;
-  }
-  .hero-content {
-    padding: 1.2rem 0.2rem 1rem 0.2rem;
-  }
-  .hero-title {
-    font-size: 1.3rem;
-  }
-  .hero-subtitle {
-    font-size: 0.95rem;
-    margin-bottom: 1rem;
-  }
-  .amazon-buy-btn {
-    font-size: 0.95rem;
-    padding: 0.5rem 1rem;
-  }
-  .amazon-logo {
-    height: 20px;
-  }
-  .products-section {
-    padding: 0 0.2rem;
-    margin-bottom: 1.2rem;
-  }
-  .section-title {
-    font-size: 1.1rem;
-    margin-bottom: 0.8rem;
-  }
-  .product-grid {
-    flex-direction: column;
-    gap: 1rem;
-  }
-  .product-grid > * {
-    min-width: 0;
-    max-width: 100%;
-    flex: 1 1 100%;
-  }
-  .footer-content {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.7rem;
-    font-size: 0.98rem;
-    padding: 0 0.5rem;
-  }
-  .company-info {
-    font-size: 1rem;
-  }
-  .contact-info {
-    font-size: 0.98rem;
-  }
-  .social-icons {
-    font-size: 1.5rem;
-    gap: 0.7rem;
-    margin-top: 0.2rem;
-  }
-  .copyright {
-    font-size: 0.92rem;
-    padding-top: 0.5rem;
-    margin-top: 0.7rem;
-  }
+    .main-nav {
+        flex-direction: row;
+        /* 保持一行 */
+        align-items: center;
+        padding: 0.8rem 1rem;
+        gap: 0.5rem;
+    }
+
+    .nav-left {
+        gap: 0.5rem;
+    }
+
+    .brand-name {
+        font-size: 1.2rem;
+    }
+
+    .nav-logo {
+        height: 48px;
+    }
+
+    .nav-right {
+        width: auto;
+        justify-content: flex-end;
+    }
+
+    .banner-text h2 {
+        font-size: 1.1rem;
+    }
+
+    .banner-text p {
+        font-size: 0.85rem;
+    }
+
+    .hero-section {
+        min-height: 180px;
+        margin-bottom: 1rem;
+        padding: 0.5rem 0;
+    }
+
+    .hero-content {
+        padding: 1.2rem 0.2rem 1rem 0.2rem;
+    }
+
+    .hero-title {
+        font-size: 1.3rem;
+    }
+
+    .hero-subtitle {
+        font-size: 0.95rem;
+        margin-bottom: 1rem;
+    }
+
+    .amazon-buy-btn {
+        font-size: 0.95rem;
+        padding: 0.5rem 1rem;
+    }
+
+    .amazon-logo {
+        height: 20px;
+    }
+
+    .products-section {
+        padding: 0 0.2rem;
+        margin-bottom: 1.2rem;
+    }
+
+    .section-title {
+        font-size: 1.1rem;
+        margin-bottom: 0.8rem;
+    }
+
+    .product-grid {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .product-grid>* {
+        min-width: 0;
+        max-width: 100%;
+        flex: 1 1 100%;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.7rem;
+        font-size: 0.98rem;
+        padding: 0 0.5rem;
+    }
+
+    .company-info {
+        font-size: 1rem;
+    }
+
+    .contact-info {
+        font-size: 0.98rem;
+    }
+
+    .social-icons {
+        font-size: 1.5rem;
+        gap: 0.7rem;
+        margin-top: 0.2rem;
+    }
+
+    .copyright {
+        font-size: 0.92rem;
+        padding-top: 0.5rem;
+        margin-top: 0.7rem;
+    }
 }
 </style>

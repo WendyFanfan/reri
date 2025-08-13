@@ -3,7 +3,7 @@
         <img :src="image" :alt="title" />
         <h3>{{ title }}</h3>
         <p>{{ description }}</p>
-        <n-button tag="a" :href="link" target="_blank" type="primary">{{ $t("buyNow") }}</n-button>
+        <n-button tag="a" :href="link" target="_blank" type="info">{{ $t("buyNow") }}</n-button>
     </div>
 </template>
 

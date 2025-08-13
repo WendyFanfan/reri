@@ -1,12 +1,21 @@
 <template>
-  <div id="app">
-    <router-view />
-  </div>
+  <n-config-provider :theme-overrides="themeOverrides">
+    <div id="app">
+      <router-view />
+    </div>
+  </n-config-provider>
+
 </template>
 
 <script setup lang="ts">
-// 如果你已经启用 Vue Router（可选）
-// 否则你可以改为直接渲染 <Home /> 组件：
+import { NConfigProvider, type GlobalThemeOverrides } from 'naive-ui'
+
+const themeOverrides: GlobalThemeOverrides = {
+  common: {
+    primaryColor: '#2563eb'
+  },
+}
+
 </script>
 
 <style>
@@ -18,6 +27,5 @@ body {
 
 #app {
   margin: auto;
-  padding: 1rem;
 }
 </style>

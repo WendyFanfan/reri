@@ -4,6 +4,8 @@ import App from './App.vue'
 import { createI18n } from 'vue-i18n'
 import router from './router'
 import messages from './i18n/messages'
+import { createPinia } from 'pinia'
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 
 // 按需导入 Naive UI 组件
 import {
@@ -30,10 +32,14 @@ const i18n = createI18n({
 
 const app = createApp(App)
 
+const pinia = createPinia()
+pinia.use(piniaPluginPersistedstate) // 开启持久化
+
 // 只注册你需要的组件
 app
     .use(router)
     .use(i18n)
+    .use(pinia)
     .component('NButton', NButton)
     .component('NCard', NCard)
     .component('NGrid', NGrid)
