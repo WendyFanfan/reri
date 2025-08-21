@@ -1,0 +1,10 @@
+[build]
+  command = "cd frontend && npm install && npm run build"
+  publish = "frontend/dist"        # Vite 构建输出目录
+  functions = "netlify/functions"  # Netlify 函数目录
+
+# 可选：重写路由，适用于 Vue3 SPA
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

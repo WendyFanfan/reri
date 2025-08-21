@@ -7,7 +7,7 @@
         </div>
         <div class="nav-right">
             <div>
-                <n-button>{{ $t('login') }}</n-button>
+                <n-button @click="goToLogin">{{ $t('login') }}</n-button>
                 <n-icon size="18">
                     <Person />
                 </n-icon>
@@ -24,7 +24,8 @@
 <script setup>
 import { useI18n } from "vue-i18n";
 import { computed } from "vue";
-import { Person } from '@vicons/ionicons5'
+import { Person } from '@vicons/ionicons5';
+import { useRouter} from 'vue-router';
 
 const { locale } = useI18n();
 
@@ -41,6 +42,12 @@ const currentLangLabel = computed(() => {
     const found = langOpts.find(opt => opt.key === locale.value);
     return found ? found.label : locale.value;
 });
+
+const router = useRouter();
+const goToLogin = () => {
+    router.push({ name: 'Login' });
+};
+
 </script>
 
 <style scoped>

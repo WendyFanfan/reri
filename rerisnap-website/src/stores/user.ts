@@ -1,56 +1,37 @@
+// src/stores/user.ts
 import { defineStore } from 'pinia'
+
+export interface UserInfo {
+  id?: string
+  name?: string
+  email?: string
+  phone?: string
+  address?: string
+  // 可根据需要扩展
+}
 
 export const useUserStore = defineStore('user', {
   state: () => ({
-    name: '',
-    email: '',
-    password: '',
-    phone: '',
-    address: '',
-    orders: [] as Array<{ id: number, product: string, quantity: number, price: number }>
+    token: '' as string,
+    user: null as UserInfo | null,
   }),
-
   getters: {
-    orderCount: (state) => state.orders.length,
-    isLoggedIn: (state) => !!state.email && !!state.password
+    isAuthenticated: (state) => !!state.token,
+    userEmail: (state) => state.user?.email ?? '',
   },
-
   actions: {
-    setUserInfo(userData: {
-      name?: string
-      email?: string
-      password?: string
-      phone?: string
-      address?: string
-    }) {
-      this.name = userData.name ?? this.name
-      this.email = userData.email ?? this.email
-      this.password = userData.password ?? this.password
-      this.phone = userData.phone ?? this.phone
-      this.address = userData.address ?? this.address
+    setAuth(token: string, user: UserInfo | null) {
+      this.token = token
+      this.user = user
     },
-
-    addOrder(order: { id: number, product: string, quantity: number, price: number }) {
-      this.orders.push(order)
-    },
-
-    clearOrders() {
-      this.orders = []
-    },
-
-    logout() {
-      this.name = ''
-      this.email = ''
-      this.password = ''
-      this.phone = ''
-      this.address = ''
-      this.orders = []
+    clearAuth() {
+      this.token = ''
+      this.user = null
     }
   },
-
-  // 持久化配置
   persist: {
-    key: 'reri-user', // localStorage 存储的 key
-    storage: localStorage, // 使用 localStorage 存储
+    key: 'reri-user',
+    // 使用 localStorage（开发阶段）；上线后若改为 HttpOnly cookie，可移除 persist 或只存非敏感 user info
+    storage: localStorage,
   }
 })

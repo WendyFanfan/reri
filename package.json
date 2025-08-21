@@ -1,0 +1,12 @@
+{
+  "name": "reri",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "netlify dev"
+  },
+  "dependencies": {
+    "airtable": "^0.11.6",
+    "dotenv": "^17.2.1",
+    "node-fetch": "^3.3.2"
+  }
+}
