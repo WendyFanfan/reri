@@ -1,23 +1,19 @@
-import { defineConfig } from "vite";
-import vue from "@vitejs/plugin-vue";
-import path from "path";
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
 
 export default defineConfig({
   plugins: [vue()],
   server: {
     host: '0.0.0.0',
     port: 5173,
+    // 支持 SPA 刷新
+    historyApiFallback: true,
     proxy: {
       '/.netlify/functions': {
         target: 'http://localhost:8888',
         changeOrigin: true,
-      },
-    },
-  },
-
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "./src"),
-    },
-  },
-});
+        rewrite: (path) => path.replace(/^\/\.netlify\/functions/, '/.netlify/functions')
+      }
+    }
+  }
+})
