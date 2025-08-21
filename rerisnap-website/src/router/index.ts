@@ -13,7 +13,7 @@ const routes: RouteRecordRaw[] = [
   { path: "/en", name: "HomeEn", component: Home, meta: { lang: "en" } },
   { path: "/login", name: "Login", component: Login },
   { path: "/register", name: "Register", component: Register },
-  { path: "/sensor", name: "SensorData", component: sensorData },
+  { path: "/SensorData", name: "SensorData", component: sensorData },
 
 ];
 

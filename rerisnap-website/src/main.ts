@@ -18,7 +18,8 @@ import {
     NDivider,
     NDropdown,
     NInput,
-    NIcon
+    NIcon,
+    NDataTable,
 } from 'naive-ui'
 
 export type MessageSchema = typeof messages['en']
@@ -44,6 +45,7 @@ app
     .component('NCard', NCard)
     .component('NGrid', NGrid)
     .component('NGridItem', NGridItem)
+    .component('NDataTable', NDataTable)
     .component('NImage', NImage)
     .component('NDivider', NDivider)
     .component('NDropdown', NDropdown)

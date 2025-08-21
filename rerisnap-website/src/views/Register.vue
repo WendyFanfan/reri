@@ -11,7 +11,7 @@
     <!-- 右侧注册表单 -->
     <div class="register-right">
       <n-card class="register-card" title="Create an Account" size="large">
-        <n-form :model="form" :rules="rules" ref="formRef">
+        <n-form :model="form" ref="formRef">
           <n-form-item label="Name" path="name">
             <n-input v-model:value="form.name" placeholder="Your Name" />
           </n-form-item>
@@ -59,22 +59,22 @@ const form = reactive({
   confirmPassword: ""
 })
 
-const rules = {
-  name: [{ required: true, message: "Name is required", trigger: "blur" }],
-  email: [
-    { required: true, message: "Email is required", trigger: "blur" },
-    { type: "email", message: "Invalid email format", trigger: "blur" }
-  ],
-  password: [{ required: true, message: "Password is required", trigger: "blur" }],
-  confirmPassword: [
-    { required: true, message: "Please confirm password", trigger: "blur" },
-    {
-      validator: (rule: any, value: string) => value === form.password,
-      message: "Passwords do not match",
-      trigger: "blur"
-    }
-  ]
-}
+// const rules = {
+//   name: [{ required: true, message: "Name is required", trigger: "blur" }],
+//   email: [
+//     { required: true, message: "Email is required", trigger: "blur" },
+//     { type: "email", message: "Invalid email format", trigger: "blur" }
+//   ],
+//   password: [{ required: true, message: "Password is required", trigger: "blur" }],
+//   confirmPassword: [
+//     { required: true, message: "Please confirm password", trigger: "blur" },
+//     {
+//       validator: (rule: any, value: string) => value === form.password,
+//       message: "Passwords do not match",
+//       trigger: "blur"
+//     }
+//   ]
+// }
 
 async function onSubmit() {
   formRef.value?.validate(async (errors: any) => {

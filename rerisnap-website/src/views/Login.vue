@@ -54,8 +54,8 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { loginApi } from '@/services/auth'
-import { useUserStore } from '@/stores/user'
+import { loginApi } from '../services/auth'
+import { useUserStore } from '../stores/user'
 import { NForm, NFormItem, NInput, NButton, NCard } from 'naive-ui'
 
 const router = useRouter()

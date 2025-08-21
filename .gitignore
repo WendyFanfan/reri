@@ -1,10 +1,10 @@
 # Node modules
 node_modules/
-rerisnap_website/node_modules/
+rerisnap-website/node_modules/
 
 # Environment files
 .env
-rerisnap_website/.env
+rerisnap-website/.env
 functions/.env  # 如果你的 Netlify 函数单独有 env 文件
 
 # Logs
@@ -12,7 +12,7 @@ functions/.env  # 如果你的 Netlify 函数单独有 env 文件
 
 # Build outputs
 dist/
-rerisnap_website/dist/
+rerisnap-website/dist/
 
 # OS / IDE files
 .DS_Store
@@ -23,3 +23,6 @@ rerisnap_website/dist/
 # Optional: Mac / Windows temporary files
 Thumbs.db
 Desktop.ini
+
+# Local Netlify folder
+.netlify

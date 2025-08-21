@@ -14,11 +14,10 @@ export default defineConfig({
           path.replace(/^\/\.netlify\/functions/, "/.netlify/functions"),
       },
     },
-    
   },
   resolve: {
-      alias: {
-        "@": path.resolve(__dirname, "./src"),
-      },
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
     },
+  },
 });
