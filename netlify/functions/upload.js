@@ -4,6 +4,10 @@ const base = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY })
   .base(process.env.AIRTABLE_BASE_ID);
 
 export async function handler(event) {
+  console.log("=== Incoming Request ===");
+  console.log("HTTP Method:", event.httpMethod);
+  console.log("Headers:", JSON.stringify(event.headers, null, 2));
+  console.log("Raw Body:", event.body);
   if (event.httpMethod !== "POST") {
     return { statusCode: 405, body: "Method Not Allowed" };
   }
