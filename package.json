@@ -2,9 +2,7 @@
   "name": "rerisnap",
   "version": "1.0.0",
   "scripts": {
-    "dev": "concurrently \"cd rerisnap-website && npm run dev\" \"netlify dev --port=8888 --functions=reri/functions\"",
-    "build": "cd rerisnap-website && npm run build",
-    "serve": "cd rerisnap-website && npm run preview"
+    "dev": "netlify dev --functions=netlify/functions --port=8888"
   },
   "dependencies": {
     "airtable": "^0.12.2",

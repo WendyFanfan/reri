@@ -1,7 +1,5 @@
-[build]
-  publish = "rerisnap-website/dist"
-  functions = "reri/functions"
+
 
 [dev]
   port = 8888
-  functions = "reri/functions"
+  functions = "netlify/functions"

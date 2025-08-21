@@ -5,16 +5,16 @@ import path from "path";
 export default defineConfig({
   plugins: [vue()],
   server: {
-    // 开发环境代理，避免跨域
+    host: '0.0.0.0',
+    port: 5173,
     proxy: {
-      "/.netlify/functions": {
-        target: "http://localhost:8888",
+      '/.netlify/functions': {
+        target: 'http://localhost:8888',
         changeOrigin: true,
-        rewrite: (path) =>
-          path.replace(/^\/\.netlify\/functions/, "/.netlify/functions"),
       },
     },
   },
+
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
