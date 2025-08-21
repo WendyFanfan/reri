@@ -6,8 +6,6 @@ export default defineConfig({
   server: {
     host: '0.0.0.0',
     port: 5173,
-    // 支持 SPA 刷新
-    historyApiFallback: true,
     proxy: {
       '/.netlify/functions': {
         target: 'http://localhost:8888',
