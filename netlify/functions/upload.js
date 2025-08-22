@@ -14,7 +14,6 @@ export async function handler(event) {
   }
 
   try {
-    // 原有逻辑 ...
     let body;
     const contentType = event.headers["content-type"] || event.headers["Content-Type"];
     if (contentType && contentType.includes("application/json")) {
@@ -42,7 +41,8 @@ export async function handler(event) {
 
     console.log("Will create records:", JSON.stringify(recordsToCreate, null, 2));
 
-    await table.create(recordsToCreate);
+    // ✅ 改这里，使用 base 调用 table
+    await base(process.env.AIRTABLE_TABLE_NAME).create(recordsToCreate);
 
     return { statusCode: 200, body: "Data stored successfully" };
   } catch (error) {
