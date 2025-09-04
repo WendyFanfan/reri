@@ -20,6 +20,9 @@ import {
     NInput,
     NIcon,
     NDataTable,
+    NDatePicker,
+    NSpace,
+    NSpin
 } from 'naive-ui'
 
 export type MessageSchema = typeof messages['en']
@@ -52,4 +55,7 @@ app
     .component('NConfigProvider', NConfigProvider)
     .component('NInput', NInput)
     .component('NIcon', NIcon)
+    .component('NDatePicker', NDatePicker)
+    .component('NSpace', NSpace)
+    .component('NSpin', NSpin)
     .mount('#app')

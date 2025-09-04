@@ -8,7 +8,7 @@ export default defineConfig({
     port: 5173,
     proxy: {
       '/.netlify/functions': {
-        target: 'http://localhost:8888',
+        target: 'http://localhost:5173',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/\.netlify\/functions/, '/.netlify/functions')
       }
